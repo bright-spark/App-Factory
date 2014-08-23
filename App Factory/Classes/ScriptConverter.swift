@@ -4,21 +4,27 @@ class ScriptConverter {
     var scriptPath: String
     var savePath: String
     var iconPath: String?
-    var fullAppPath: String
-    var resourcesPath: String
-    var iconFileName: String
-    var fileManager: NSFileManager
+    
+    var fullAppPath: String {
+        return NSString.pathWithComponents([savePath, "Contents/MacOS/"])
+    }
+    
+    var resourcesPath: String {
+        return NSString.pathWithComponents([savePath, "Contents/Resources/"])
+    }
+    
+    var fileManager: NSFileManager {
+        return NSFileManager.defaultManager()
+    }
+    
+    var iconFileName: String {
+        return iconPath!.lastPathComponent.stringByDeletingPathExtension + ".icns"
+    }
     
     init(scriptPath: String, savePath: String, iconPath: String) {
         self.scriptPath = scriptPath
         self.savePath = savePath
         self.iconPath = iconPath
-        
-        self.fullAppPath = NSString.pathWithComponents([savePath, "Contents/MacOS/"])
-        self.resourcesPath = NSString.pathWithComponents([savePath, "Contents/Resources/"])
-        self.iconFileName = iconPath.lastPathComponent.stringByDeletingPathExtension + ".icns"
-        
-        self.fileManager = NSFileManager.defaultManager()
     }
     
     func createApp() {
@@ -97,11 +103,32 @@ class ScriptConverter {
     }
     
     func makeScriptExecutable(path: String) {
-        // TODO
+        if fileManager.isExecutableFileAtPath(path) {
+            return
+        }
+        
+        NSTask.launchedTaskWithLaunchPath("/bin/chmod",
+            arguments: ["+x", path]
+        ).waitUntilExit()
     }
     
     func writeIcon() {
-        // TODO
+        fileManager.createDirectoryAtPath(resourcesPath,
+            withIntermediateDirectories: true,
+            attributes: nil,
+            error: nil)
+        
+        let destPath = NSString.pathWithComponents([resourcesPath, iconFileName])
+        
+        let imgUrl = NSURL(string: iconPath!) as CFURL!
+        let img = CGImageSourceCreateWithURL(imgUrl, nil);
+        let ref = CGImageSourceCreateImageAtIndex(img, 1, nil)
+        
+        let destUrl = NSURL(string: destPath) as CFURL!
+        let dest = CGImageDestinationCreateWithURL(destUrl, kUTTypeAppleICNS, 1, nil)
+        
+        CGImageDestinationAddImageFromSource(dest, img, 0, nil)
+        CGImageDestinationFinalize(dest)
     }
 }
 
