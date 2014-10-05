@@ -1,33 +1,34 @@
 import Foundation
 
-class ScriptConverter {
-    var scriptPath: String
-    var savePath: String
-    var iconPath: String?
+@objc
+public class ScriptConverter : NSObject {
+    private var scriptPath: String
+    private var savePath: String
+    private var iconPath: String?
     
-    var fullAppPath: String {
+    private var fullAppPath: String {
         return NSString.pathWithComponents([savePath, "Contents/MacOS/"])
     }
     
-    var resourcesPath: String {
+    private var resourcesPath: String {
         return NSString.pathWithComponents([savePath, "Contents/Resources/"])
     }
     
-    var fileManager: NSFileManager {
+    private var fileManager: NSFileManager {
         return NSFileManager.defaultManager()
     }
     
-    var iconFileName: String {
+    private var iconFileName: String {
         return iconPath!.lastPathComponent.stringByDeletingPathExtension + ".icns"
     }
     
-    init(scriptPath: String, savePath: String, iconPath: String) {
+    public init(scriptPath: String, savePath: String, iconPath: String) {
         self.scriptPath = scriptPath
         self.savePath = savePath
         self.iconPath = iconPath
     }
     
-    func createApp() {
+    public func createApp() {
         writeScript()
         
         if iconPath != nil {
@@ -36,7 +37,7 @@ class ScriptConverter {
         }
     }
     
-    func writeScript() {
+    private func writeScript() {
         fileManager.createDirectoryAtPath(fullAppPath,
             withIntermediateDirectories: true,
             attributes: nil,
@@ -51,7 +52,7 @@ class ScriptConverter {
         
     }
     
-    func writePlist() {
+    private func writePlist() {
         let content =
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
             "<!DOCTYPE plist PUBLIC \"-//Apple Computer//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n"
@@ -71,7 +72,7 @@ class ScriptConverter {
         )
     }
     
-    func writeScriptDirectory() {
+    private func writeScriptDirectory() {
         let files = fileManager.contentsOfDirectoryAtPath(scriptPath, error: nil)
         let appName = scriptPath.lastPathComponent
         
@@ -90,7 +91,7 @@ class ScriptConverter {
         }
     }
     
-    func writeScriptFile() {
+    private func writeScriptFile() {
         let appFileName = scriptPath.lastPathComponent.stringByDeletingPathExtension
         let fullPath = NSString.pathWithComponents([fullAppPath, appFileName])
         
@@ -102,7 +103,7 @@ class ScriptConverter {
         )
     }
     
-    func makeScriptExecutable(path: String) {
+    private func makeScriptExecutable(path: String) {
         if fileManager.isExecutableFileAtPath(path) {
             return
         }
@@ -112,7 +113,7 @@ class ScriptConverter {
         ).waitUntilExit()
     }
     
-    func writeIcon() {
+    private func writeIcon() {
         fileManager.createDirectoryAtPath(resourcesPath,
             withIntermediateDirectories: true,
             attributes: nil,

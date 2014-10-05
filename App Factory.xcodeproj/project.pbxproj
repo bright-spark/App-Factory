@@ -16,7 +16,6 @@
 		16F8D4EC15E9BE4200152DB9 /* IAScriptDrop.m in Sources */ = {isa = PBXBuildFile; fileRef = 16F8D4EB15E9BE4200152DB9 /* IAScriptDrop.m */; };
 		16F8D4EE15E9BE6500152DB9 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16F8D4ED15E9BE6500152DB9 /* MainMenu.xib */; };
 		16FECC1419A83658009D0E36 /* ScriptConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FECC1319A83658009D0E36 /* ScriptConverter.swift */; };
-		60354525B1225093D3A7A059 /* ScriptConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 603545FBDCD82E7A5F4878C8 /* ScriptConverter.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,8 +37,6 @@
 		16F8D4ED15E9BE6500152DB9 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
 		16F8D4F315E9BFC600152DB9 /* App Factory.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "App Factory.entitlements"; sourceTree = "<group>"; };
 		16FECC1319A83658009D0E36 /* ScriptConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScriptConverter.swift; sourceTree = "<group>"; };
-		603541ECA6A6F02E216341E1 /* ScriptConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScriptConverter.h; sourceTree = "<group>"; };
-		603545FBDCD82E7A5F4878C8 /* ScriptConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScriptConverter.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,8 +118,6 @@
 		603544408AE1290E5F490D6F /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				603545FBDCD82E7A5F4878C8 /* ScriptConverter.m */,
-				603541ECA6A6F02E216341E1 /* ScriptConverter.h */,
 				16FECC1319A83658009D0E36 /* ScriptConverter.swift */,
 			);
 			path = Classes;
@@ -202,7 +197,6 @@
 				16F8D4E615E9BE0100152DB9 /* AppDelegate.m in Sources */,
 				16F8D4E915E9BE3B00152DB9 /* IAIconDrop.m in Sources */,
 				16F8D4EC15E9BE4200152DB9 /* IAScriptDrop.m in Sources */,
-				60354525B1225093D3A7A059 /* ScriptConverter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

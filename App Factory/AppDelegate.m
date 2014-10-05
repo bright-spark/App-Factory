@@ -1,7 +1,7 @@
 #import "AppDelegate.h"
 #import "IAScriptDrop.h"
 #import "IAIconDrop.h"
-#import "ScriptConverter.h"
+#import "App_Factory-Swift.h"
 
 @implementation AppDelegate {
     NSButton *buildAppButton;
@@ -30,9 +30,9 @@
 
         [savePanel beginWithCompletionHandler:^(NSInteger response) {
             if (response == NSFileHandlingPanelOKButton) {
-
+                
                 ScriptConverter *converter =
-                        [[ScriptConverter alloc] initWithPath: self.scriptDrop.scriptPath
+                        [[ScriptConverter alloc] initWithScriptPath: self.scriptDrop.scriptPath
                                                                savePath: [[savePanel URL] path]
                                                                iconPath: self.iconDrop.iconPath];
                 [converter createApp];
