@@ -1,5 +1,4 @@
 #import "AppDelegate.h"
-#import "IAScriptDrop.h"
 #import "IAIconDrop.h"
 #import "App_Factory-Swift.h"
 
